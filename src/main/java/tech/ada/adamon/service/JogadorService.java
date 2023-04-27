@@ -49,6 +49,15 @@ public class JogadorService {
 
         }
 
+        if(adamonsDisponiveisJogador1 == 0 && adamonsDisponiveisJogador2 > 0){
+            jogador2.setSaldo(jogador2.getSaldo().add(BigDecimal.valueOf(250)));
+            jogador1.setSaldo(jogador1.getSaldo().subtract(BigDecimal.valueOf(150)));
+        } else if(adamonsDisponiveisJogador2 == 0 && adamonsDisponiveisJogador1 > 0){
+            jogador1.setSaldo(jogador1.getSaldo().add(BigDecimal.valueOf(250)));
+            jogador2.setSaldo(jogador2.getSaldo().subtract(BigDecimal.valueOf(150)));
+        }
+
+
     }
 
 
