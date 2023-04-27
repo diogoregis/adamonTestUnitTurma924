@@ -21,26 +21,13 @@ public class JogadorService {
 
 
 
-
-
-    /*
-    Criar um método batalhar que recebe dois jogadores, e este método será responsável pela
-    lógica de uma batalha entre duas equipes de Adamons. A lógica da batalha fica a sua escolha,
-    um jogador será vitorioso o adversário não possuir mais adamons vivos (vida > 0);
-     */
     public void batalhar(Jogador jogador1, Jogador jogador2) {
+        int adamonJogador1Conta = 0, adamonJogador2Conta = 0;
+
 
     }
 
 
-
-    /*
-        1 - Implementar preços na classe 'Adamon'
-        2 - Implementar método de compra do 'Adamon'
-        3 - Um jogador só pode ter no máximo 6 adamons em sua equipe
-        4 - Escrever testes para este método
-        5 - Pesquisar como testar um método void com 'Mockito'
-     */
     public void comprarAdamon(Jogador jogador, Adamon adamon) {
         List<Adamon> equipeAdamonJogador = jogador.getAdamons();
         BigDecimal saldoAtual = jogador.getSaldo();
@@ -80,6 +67,33 @@ public class JogadorService {
         return jogadorRepository.save(JogadorDtoConverter.converterDto(dto));
     }
 
+    public int lutaEntreAdamons(Adamon adamon1, Adamon adamon2){
+        int danoCausado = 0;
+        while ((adamon1.getVida() > 0) && adamon2.getVida() > 0){
 
+            // QUEM TEM MAIOR VELOCIDADE ATAK PRIMEIRO
+            // PRIMEIRO ATAQUE:
+            if(adamon1.getVelocidade() >= adamon2.getVelocidade()){
+                if(adamon1.getAtaque() > adamon2.getAtaque()){
+                    danoCausado = adamon1.getAtaque() - adamon2.getDefesa();
+                    adamon2.setVida(adamon2.getVida() - danoCausado);
+                } else adamon2.setVida(adamon2.getVida() - 1);
+            }
+            if(adamon2.getVida() <= 0){
+                return 1;
+            }
+            // SEGUNDO ATAQUE
+            if(adamon1.getVelocidade() <= adamon2.getVelocidade()){
+                if(adamon2.getAtaque() > adamon1.getAtaque()){
+                    danoCausado = adamon2.getAtaque() - adamon1.getDefesa();
+                    adamon1.setVida(adamon1.getVida() - danoCausado);
+                } else adamon1.setVida(adamon1.getVida() - 1);
+            }
+            if (adamon1.getVida() <=0){
+                return 2;
+            }
+        }
+        return -1;
+    }
 
 }
