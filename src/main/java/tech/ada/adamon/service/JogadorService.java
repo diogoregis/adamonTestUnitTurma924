@@ -22,8 +22,32 @@ public class JogadorService {
 
 
     public void batalhar(Jogador jogador1, Jogador jogador2) {
-        int adamonJogador1Conta = 0, adamonJogador2Conta = 0;
+        //MECANICA DO RESULTADO DA BATALHA
+        // CHAMANDO METODO lutaEntreAdamons()
+        int adamonsDisponiveisJogador1 = jogador1.getAdamons().size();
+        int adamonsDisponiveisJogador2 = jogador2.getAdamons().size();
 
+        while ((adamonsDisponiveisJogador1 > 0) && (adamonsDisponiveisJogador2 > 0)){
+
+            int resultado = lutaEntreAdamons(jogador1.getAdamons().get(adamonsDisponiveisJogador1),
+                    jogador2.getAdamons().get(adamonsDisponiveisJogador2));
+
+            switch (resultado){
+                case 1:
+                    adamonsDisponiveisJogador2--;
+                    break;
+                case 2:
+                    adamonsDisponiveisJogador1--;
+                    break;
+                case -1:
+                    adamonsDisponiveisJogador1--;
+                    adamonsDisponiveisJogador2--;
+                    break;
+                default:
+                    break;
+            }
+
+        }
 
     }
 
